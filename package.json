@@ -1,0 +1,34 @@
+{
+  "name": "assignment-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --recursive --exit",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neu-mis-info6150-fall2021/assignment-7-sonalisinghnortheastern.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neu-mis-info6150-fall2021/assignment-7-sonalisinghnortheastern/issues"
+  },
+  "homepage": "https://github.com/neu-mis-info6150-fall2021/assignment-7-sonalisinghnortheastern#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "axios": "^0.25.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.3.2",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0"
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "mocha": "^9.2.0"
+  }
+}
