@@ -61,10 +61,15 @@ export const updateUser = async (req,res,next) => {
             let response = { statusCode: 400, message:"Bad Request"};
             return response;
         }
+        if (!req.body.first_name || !req.body.last_name || !req.body.password)
+        {
+            let response = { statusCode: 400, message:"Bad Request"};
+            return response;
+        }
         await User.update({
-            first_name: !req.body.first_name ? user[0].dataValues.first_name : req.body.first_name,
-            last_name: !req.body.last_name? user[0].dataValues.last_name : req.body.last_name,
-            password: req.body.password
+            first_name: req.body.first_name,
+            last_name:  req.body.last_name,
+            password:   req.body.password
         }, {
             where: {
                 username: returnedValue.username
