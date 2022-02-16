@@ -31,7 +31,7 @@ export const createNewUser = async (req,res) => {
                 id:newRegistration.id,
                 username: newRegistration.username,
                 first_name: newRegistration.first_name,
-                last_name: newRegistration.last_name,
+                last_name: newRegistration.last_name, 
                 createdAt: newRegistration.createdAt,
                 updatedAt: newRegistration.updatedAt,
         };
