@@ -9,9 +9,16 @@ console.log('Connection has been established successfully.');
 console.error('Unable to connect to the database:', err);
 });
 const User = sequelize.define('user', {
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV1,
+        primaryKey: true,
+        allowNull:true
+      },
     username: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique:true
     },
     password: {
         type: Sequelize.STRING,
@@ -27,4 +34,5 @@ const User = sequelize.define('user', {
     }
     
 });
+//User.sync({ force: true });
 export default User;
