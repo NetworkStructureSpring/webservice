@@ -38,8 +38,8 @@ build {
   provisioner "shell" {
     inline = ["mkdir /src"]
   }
-  provisioner "file"{
-    source = "/home/runner/work/webservice/webservice."
-    destination = "/src/"
+  provisioner "shell" {
+    inline = ["ls -al"]
   }
+
 }
