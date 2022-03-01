@@ -36,8 +36,11 @@ build {
     "source.amazon-ebs.ami-image",
   ]
   provisioner "shell" {
+    inline = [" sudo cd .."]
+  }
+  provisioner "shell" {
     inline = [" sudo ls -al"]
   }
-  
+
 
 }
