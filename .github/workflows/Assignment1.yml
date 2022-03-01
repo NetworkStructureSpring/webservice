@@ -24,3 +24,15 @@ jobs:
       - run: zip app.zip ./* -r
       - run: ls -al
       - run: pwd
+      - name: Step 2 - Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: packer.pkr.hcl
+      - name: Step 3- Packer Build
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          target: packer.pkr.hcl
+        env:
+          PACKER_LOG: 1

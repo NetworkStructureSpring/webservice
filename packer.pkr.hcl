@@ -35,4 +35,11 @@ build {
   sources = [
     "source.amazon-ebs.ami-image",
   ]
+  provisioner "shell" {
+    inline = ["mkdir /src"]
+  }
+  provisioner "file"{
+    source = "/home/runner/work/webservice/webservice."
+    destination = "/src/"
+  }
 }
