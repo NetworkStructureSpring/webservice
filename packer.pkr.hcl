@@ -36,10 +36,7 @@ build {
     "source.amazon-ebs.ami-image",
   ]
   provisioner "shell" {
-    inline = ["mkdir /src"]
-  }
-  provisioner "shell" {
-    inline = ["ls -al"]
+    inline = [" sudo ls -al"]
   }
 
 }
