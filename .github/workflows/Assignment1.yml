@@ -22,8 +22,7 @@ jobs:
       - run: npm install
       - run: npm run build --if-present
       - run: zip app.zip ./* -r
-      - run: ls -al
-      - run: pwd
+
       - name: Step 2 - Packer Init
         uses: hashicorp/packer-github-actions@master
         with:
