@@ -4,7 +4,7 @@ on:
   push:
     branches: [Assignment-4]
   #pull_request:
-    #branches: [main]
+  #branches: [main]
 
   workflow_dispatch:
 
@@ -21,7 +21,3 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build --if-present
-      - run: npm test
-       - name: Zip artifact for deployment
-         run: zip app.zip ./* -r
-
