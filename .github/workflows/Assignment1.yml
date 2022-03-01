@@ -23,15 +23,5 @@ jobs:
       - run: npm run build --if-present
       - run: zip app.zip ./* -r
 
-      - name: Step 2 - Packer Init
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: init
-          target: packer.pkr.hcl
-      - name: Step 3- Packer Build
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          target: packer.pkr.hcl
-        env:
-          PACKER_LOG: 1
+      - run: packer init packer.pkr.hcl
+      - run: packer build packer.pkr.hcl
