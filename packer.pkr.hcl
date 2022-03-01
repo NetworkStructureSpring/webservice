@@ -40,6 +40,7 @@ build {
   }
   provisioner "shell" {
     inline = [" sudo ls -al"]
+    
   }
 
 
