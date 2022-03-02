@@ -23,6 +23,7 @@ sudo systemctl stop postgresql-13.service
 sudo systemctl start postgresql-13.service
 sudo systemctl status postgresql-13.service
 
+
 curl --silent --location https://rpm.nodesource.com/setup_17.x | sudo bash -
 sudo yum install -y nodejs
 sudo node -v
