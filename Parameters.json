@@ -10,5 +10,30 @@
     {
     "ParameterKey": "DestinationRouteCIDR",
     "ParameterValue": "0.0.0.0/0"
+    },
+    {
+    "ParameterKey": "SecurityGroupName",
+    "ParameterValue": "Security Group"
+    },
+    {
+    "ParameterKey": "SecurityGroupDescription",
+    "ParameterValue": "Infrastructure for security group"
+    },
+    {
+        "ParameterKey": "AMIImage",
+        "ParameterValue": "ami-0a4a971b601e7c695"   
+    },
+    {
+        "ParameterKey": "Key",
+        "ParameterValue": "testKey"   
+    },
+    {
+        "ParameterKey": "Volume",
+        "ParameterValue": "gp2"   
+    },
+    {
+        "ParameterKey": "Size",
+        "ParameterValue": "20"   
     }
+    
 ]

@@ -17,6 +17,36 @@ Parameters:
     Type: String
     Default: 0.0.0.0/0
 
+  SecurityGroupName:
+    Description: Security Group Name
+    Type: String
+    Default: ""
+
+  SecurityGroupDescription:
+    Description: Security Group Description
+    Type: String
+    Default: ""
+
+  AMIImage:
+    Description: AMI Id
+    Type: String
+    Default: ""
+
+  Key:
+    Description: Key
+    Type: String
+    Default: ""
+
+  Volume:
+    Description: Volume Type
+    Type: String
+    Default: ""
+
+  Size:
+    Description: Size
+    Type: String
+    Default: ""
+
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -111,8 +141,8 @@ Resources:
   application:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: "Security Group"
-      GroupDescription: "Infrastructure for security group"
+      GroupName: !Ref SecurityGroupName
+      GroupDescription: !Ref SecurityGroupDescription
       VpcId: !Ref VPC
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -135,15 +165,19 @@ Resources:
   EC2Instance:
     Type: "AWS::EC2::Instance"
     Properties:
-      ImageId: "ami-0569ec4a45bc6a300"
-      DisableApiTermination: true
+      ImageId: !Ref AMIImage
+      KeyName: !Ref Key
+      DisableApiTermination: false
       InstanceType: t2.micro
       SubnetId: !Ref PublicSubnet1
+      Tags:
+        - Key: "Name"
+          Value: "cloudformationInstance"
       SecurityGroupIds:
         - !GetAtt "application.GroupId"
       BlockDeviceMappings:
         - DeviceName: "/dev/sdm"
           Ebs:
-            VolumeType: "gp2"
+            VolumeType: !Ref Volume
             DeleteOnTermination: true
-            VolumeSize: 20
+            VolumeSize: !Ref Size
