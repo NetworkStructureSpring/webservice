@@ -3,13 +3,12 @@ name: CI
 on:
   push:
     branches: [Assignment-4]
-  #pull_request:
-  #branches: [main]
-
+    types: [closed]
   workflow_dispatch:
 
 jobs:
   build:
+    if: ${{ github.event.pull_request.merged }}
     name: Packer Workflow
     runs-on: ubuntu-latest
 
