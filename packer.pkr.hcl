@@ -41,6 +41,7 @@ build {
   }
   provisioner "shell"{
     script = "./postgress.sh"
+    
   }
 
 
