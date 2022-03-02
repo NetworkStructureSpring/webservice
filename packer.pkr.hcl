@@ -41,7 +41,7 @@ variable "aws_acct_list" {
 } 
 
 source "amazon-ebs" "ami-image" {
-  ami_name      = "${var.amiName}"
+  ami_name      = "AMI{{timestamp}}"
   instance_type = "${var.instance}"  
   region        = "${var.region}"  
   ami_users     = "${var.aws_acct_list}"
