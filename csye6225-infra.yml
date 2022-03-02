@@ -167,7 +167,7 @@ Resources:
     Properties:
       ImageId: !Ref AMIImage
       KeyName: !Ref Key
-      DisableApiTermination: false
+      DisableApiTermination: true
       InstanceType: t2.micro
       SubnetId: !Ref PublicSubnet1
       Tags:

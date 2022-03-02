@@ -6,4 +6,4 @@ rootDevice="ebs"
 virtualizationType="hvm"
 aws_access_key="AKIA256ELQTI43QQ7NPC"
 aws_secret_key="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"
-aws_acct_list=[""]
+aws_acct_list=["348023801163"]
