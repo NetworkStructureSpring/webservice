@@ -17,16 +17,14 @@ sudo systemctl start postgresql-13.service
 sudo systemctl enable postgresql-13.service
 sudo systemctl status postgresql-13.service
 
-sudo psql -c "ALTER USER postgres PASSWORD '123Fall@2021';"
+sudo -u postgres bash -c "psql -c \"ALTER USER postgres with PASSWORD '123Fall@2021';\""
 
 sudo systemctl stop postgresql-13.service
 sudo systemctl start postgresql-13.service
 sudo systemctl status postgresql-13.service
 
-sudo yum install -y gcc-c++ make
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install nodejs
+curl --silent --location https://rpm.nodesource.com/setup_17.x | sudo bash -
+sudo yum install -y nodejs
 sudo node -v
-sudo npm -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
