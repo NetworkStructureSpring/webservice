@@ -17,7 +17,10 @@ sudo systemctl start postgresql-13.service
 sudo systemctl enable postgresql-13.service
 sudo systemctl status postgresql-13.service
 
-psql -c "ALTER USER postgres PASSWORD '123Fall@2021';
+psql -c "ALTER USER postgres PASSWORD '123Fall@2021';"
 
+sudo systemctl stop postgresql-13.service
+sudo systemctl start postgresql-13.service
+sudo systemctl status postgresql-13.service
 
 
