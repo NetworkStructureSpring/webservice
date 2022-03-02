@@ -28,7 +28,7 @@ sudo yum install -y nodejs
 sudo node -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
-cd webservice/app
+cd webservice
 sudo ls -al
 sudo npm i -g pm2
 sudo pm2 start /service.js
