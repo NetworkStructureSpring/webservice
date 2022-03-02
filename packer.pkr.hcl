@@ -20,12 +20,6 @@ source "amazon-ebs" "ami-image" {
     most_recent = true
     owners      = ["amazon"]
   }
-  launch_block_device_mappings {
-    device_name           = "/dev/xvda"
-    volume_type           = "gp2"
-    volume_size           = "8"
-    delete_on_termination = true
-  }
   access_key   = "AKIA256ELQTI43QQ7NPC"
   secret_key   = "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"
   ssh_username = "ec2-user"
@@ -42,8 +36,4 @@ build {
   provisioner "shell"{
     script = "./postgress.sh"
   }
-
-
-
-
 }

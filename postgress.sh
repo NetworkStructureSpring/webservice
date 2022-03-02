@@ -1,5 +1,5 @@
 #! /bin/bash
-sudo ls -al
+sleep 30
 sudo yum update -y
 sudo amazon-linux-extras install postgresql9.6
 sudo tee /etc/yum.repos.d/pgdg.repo<<EOF
@@ -17,7 +17,7 @@ sudo systemctl start postgresql-13.service
 sudo systemctl enable postgresql-13.service
 sudo systemctl status postgresql-13.service
 
-sudo -u postgres bash -c "psql -c \"ALTER USER postgres with PASSWORD '123Fall@2021';\""
+sudo -u postgres bash -c "psql -c \"ALTER USER postgres with PASSWORD '123Fall@2021';CREATE DATABASE 'UserAccount';\""
 
 sudo systemctl stop postgresql-13.service
 sudo systemctl start postgresql-13.service
