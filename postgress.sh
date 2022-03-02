@@ -31,7 +31,7 @@ sudo ls -al
 cd webservice
 sudo ls -al
 sudo npm i -g pm2
-sudo pm2 start /service.js
+sudo pm2 start /server.js
 sudo pm2 startup systemd
 sudo pm2 save
 sudo pm2 list
