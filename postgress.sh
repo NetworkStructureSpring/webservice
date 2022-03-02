@@ -26,5 +26,7 @@ sudo systemctl status postgresql-13.service
 sudo yum install -y gcc-c++ make
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install nodejs
+sudo node -v
+sudo npm -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
