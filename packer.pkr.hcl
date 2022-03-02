@@ -36,9 +36,11 @@ build {
     "source.amazon-ebs.ami-image",
   ]
   provisioner "file" {
-    source = "/home/runner/work/webservice/app.zip"
-    destination="/src"
+    source = "webservice.zip"
+    destination = "~/"
   }
+  
+
 
 
 }
