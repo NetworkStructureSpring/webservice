@@ -1,6 +1,6 @@
 #! /bin/bash
 sudo ls -al
-sudo yum update -yum
+sudo yum update -y
 sudo amazon-linux-extras install postgresql9.6
 sudo tee /etc/yum.repos.d/pgdg.repo<<EOF
 [pgdg13]
