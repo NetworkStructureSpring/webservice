@@ -25,4 +25,5 @@ jobs:
       - run: ls -al
 
       - run: packer init packer.pkr.hcl
-      - run: packer build packer.pkr.hcl
+      - run: packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
+      - run: packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
