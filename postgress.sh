@@ -19,7 +19,7 @@ sudo systemctl status postgresql-13.service
 
 sudo -u postgres psql <<EOF
          \x
-          ALTER USER postgres with PASSWORD '123Fall@2021';
+          ALTER ROLE postgres WITH PASSWORD '123Fall@2021';
           CREATE DATABASE "UserAccount";
           \q
 EOF
