@@ -23,4 +23,8 @@ sudo systemctl stop postgresql-13.service
 sudo systemctl start postgresql-13.service
 sudo systemctl status postgresql-13.service
 
-
+sudo yum install -y gcc-c++ make
+curl -sL hhtps://rpm.nodesource.com/setup_14.x | sudo -E bash -
+sudo yum install -y nodejs
+sudo unzip webservice.zip -d webservice
+sudo ls -al
