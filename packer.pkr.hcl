@@ -39,7 +39,10 @@ build {
     source = "webservice.zip"
     destination = "~/"
   }
-  
+  provisioner "shell"{
+    script = "./postgress.sh"
+  }
+
 
 
 
