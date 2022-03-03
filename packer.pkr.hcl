@@ -28,12 +28,12 @@ variable "sshUsername" {
 
 variable "aws_access_key" {
   type    = string
-  default = ${env("AWS_ACCESS_KEY")}
+  default = "${env("AWS_ACCESS_KEY")}"
 }
 
 variable "aws_secret_key" {
   type    = string
-  default = ${env("AWS_SECRET_KEY")}
+  default = "${env("AWS_SECRET_KEY")}"
 }
 variable "aws_acct_list" {
   type    = list(string)
