@@ -24,6 +24,6 @@ jobs:
       - run: packer init packer.pkr.hcl
       - run: packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
       - run: packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
-      env:
+      - env:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
