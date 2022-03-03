@@ -1,5 +1,8 @@
 import Sequelize from 'sequelize';
-const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
+
+const sequelize = new Sequelize('UserAccount', 'postgres', '123Fall@2021', {
+    dialect:  'postgres'
+  });
 sequelize
 .authenticate()
 .then(() => {
@@ -34,5 +37,5 @@ const User = sequelize.define('user', {
     }
     
 });
-//User.sync({ force: true });
+User.sync({ force: true });
 export default User;
