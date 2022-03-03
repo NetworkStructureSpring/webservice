@@ -1,22 +1,12 @@
 name: CI
+
 on:
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
-jobs:
-build:
-  name: Pull Request
-  runs-on: ubuntu-latest
-
-  steps:
-    - name: Packer Started
-      run: |
-        packer init packer.pkr.hcl
-        packer validate -syntax-only -var-file="var.pkrvars.hcl" packer.pkr.hcl
-
   push:
-    branches: [main]
+    branches: [Assignment-4]
   workflow_dispatch:
+
+jobs:
+  build:
     name: Packer Workflow
     runs-on: ubuntu-latest
 
