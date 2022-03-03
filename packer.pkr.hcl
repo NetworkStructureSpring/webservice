@@ -26,6 +26,15 @@ variable "sshUsername" {
   default = "ec2-user"
 }
 
+variable "aws_access_key" {
+  type    = string
+  default = env("AWS_ACCESS_KEY")
+}
+
+variable "aws_secret_key" {
+  type    = string
+  default = env("AWS_SECRET_KEY")
+}
 variable "aws_acct_list" {
   type    = list(string)
   default = []
@@ -45,8 +54,8 @@ source "amazon-ebs" "ami-image" {
     most_recent = true
     owners      = ["amazon"]
   }
-  access_key   = "{{user `aws_access_key`}}"
-  secret_key   = "{{user `aws_secret_key`}}"
+  access_key   = "${var.aws_access_key}"
+  secret_key   = "${var.aws_secret_key}"
   ssh_username = "${var.sshUsername}"
 }
 
