@@ -28,12 +28,12 @@ variable "sshUsername" {
 
 variable "aws_access_key" {
   type    = string
-  default = "AKIAVCB6VYVFTNJQIXAI"
+  default = env("AWS_ACCESS_KEY")
 }
 
 variable "aws_secret_key" {
   type    = string
-  default = "ypc3UHjmSFS4DqgXRfkScPsGm0/xLv7pjIsyqP40"
+  default = env("AWS_SECRET_KEY")
 }
 variable "aws_acct_list" {
   type    = list(string)
