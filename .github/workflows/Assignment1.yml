@@ -13,13 +13,10 @@ build:
       run: |
         packer init packer.pkr.hcl
         packer validate -syntax-only -var-file="var.pkrvars.hcl" packer.pkr.hcl
-    
+
   push:
     branches: [main]
   workflow_dispatch:
-
-jobs:
-  build:
     name: Packer Workflow
     runs-on: ubuntu-latest
 
