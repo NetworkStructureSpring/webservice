@@ -54,8 +54,8 @@ source "amazon-ebs" "ami-image" {
     most_recent = true
     owners      = ["amazon"]
   }
-  access_key   = "${var.aws_access_key}"   
-  secret_key   = "${var.aws_secret_key}"
+  access_key   = "${env.aws_access_key}"   
+  secret_key   = "${env.aws_secret_key}"
   ssh_username = "${var.sshUsername}"
 }
 
