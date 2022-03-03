@@ -21,9 +21,10 @@ jobs:
       - run: zip -r webservice.zip ./
       - run: ls -al
       - name: Packer Started
-        run: packer init packer.pkr.hcl
-        run: packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
-        run: packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
+        run: |
+          packer init packer.pkr.hcl
+          packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
+          packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
         env:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
