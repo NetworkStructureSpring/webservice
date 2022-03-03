@@ -35,6 +35,11 @@ Body:{
 }
 ## Basic Authentication used at GET and PUT endpoints
 
+* Created AMI images through HCL packer
+* After the image is created by github workflow update the cloudformation to create an ec2 instance
+* On bootup machine should have active web endpoints and postgres
+* If we hit api endpoints through ipv4 address it should be accessible.
+
 * Programming Language Used: Node Js
 * Tool Used : Postman
 
