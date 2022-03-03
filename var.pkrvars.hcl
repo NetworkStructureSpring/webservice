@@ -4,6 +4,3 @@ instance="t2.micro"
 sshUsername="ec2-user"
 rootDevice="ebs"
 virtualizationType="hvm"
-aws_access_key="AKIAVCB6VYVFTNJQIXAI"
-aws_secret_key="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"
-aws_acct_list=["348023801163"]
