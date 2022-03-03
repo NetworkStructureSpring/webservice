@@ -1,0 +1,19 @@
+name: CI
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Pull_Request_Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Packer Started
+        run: |
+          packer init packer.pkr.hcl
+          packer validate -syntax-only -var-file="var.pkrvars.hcl" packer.pkr.hcl
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}

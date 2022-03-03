@@ -1,13 +1,12 @@
 name: CI
-
 on:
   push:
-    branches: [Assignment-4]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   build:
-    name: Packer Workflow
+    name: Packer_Workflow
     runs-on: ubuntu-latest
 
     steps:
