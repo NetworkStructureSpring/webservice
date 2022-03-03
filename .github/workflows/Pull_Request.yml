@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Packer_Workflow
+    name: PullRequest_Workflow
     runs-on: ubuntu-latest
 
     steps:
