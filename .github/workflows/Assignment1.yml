@@ -14,8 +14,6 @@ build:
         packer init packer.pkr.hcl
         packer validate -syntax-only -var-file="var.pkrvars.hcl" packer.pkr.hcl
     
-
-on:
   push:
     branches: [main]
   workflow_dispatch:
