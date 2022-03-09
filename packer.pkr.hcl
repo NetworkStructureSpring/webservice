@@ -28,12 +28,12 @@ variable "sshUsername" {
 
 variable "aws_access_key" {
   type    = string
-  default = env("AWS_ACCESS_KEY")
+  default = ""
 }
 
 variable "aws_secret_key" {
   type    = string
-  default = env("AWS_SECRET_KEY")
+  default = ""
 }
 variable "aws_acct_list" {
   type    = list(string)
@@ -64,7 +64,7 @@ build {
     "source.amazon-ebs.ami-image",
   ]
   provisioner "file" {
-    source = "webservice.zip"
+    source = "./webservice.zip"
     destination = "~/"
   }
   provisioner "shell"{
