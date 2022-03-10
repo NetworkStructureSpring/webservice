@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
-    host: "csye6225.chilruz9tjaj.us-east-1.rds.amazonaws.com",
+    host: 'process.env.DB_CONNECTION',
     port: 5432,
     pool: {
       max: 10,
