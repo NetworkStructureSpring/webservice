@@ -17,12 +17,12 @@ export const addProfilePic = async (request, response) => {
         }
         await upload.setFileName(request,response,returnValue.foundUser[0].dataValues.id)
         const singleUpload = upload.upload.single("productimage");
-         singleUpload(request, response, function (err) {
+         singleUpload(request, response, async function (err) {
             if (err) {
                 return response.status(422).send({ errors: [{ title: 'File Upload Error', detail: err.message }] });
              }
-             const result = await upload.saveToDatabase(request, response, returnValue)
-             await setResponse(result.statusCode, response, result.message);   // change this
+             const result =await upload.saveToDatabase(request, response, returnValue)
+             setResponse(result.statusCode, response, result.message);   // change this
          });
     }
     catch (e) {
