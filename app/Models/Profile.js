@@ -1,9 +1,17 @@
 import Sequelize from 'sequelize';
 
-const sequelize = new Sequelize('UserAccount', 'postgres', '123Fall@2021', {
-    dialect:  'postgres'
-  });
+// const sequelize = new Sequelize('UserAccount', 'postgres', '123Fall@2021', {
+//     dialect:  'postgres'
+//   });
 // const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
+const sequelize = createPool({
+    port: 5432,
+    host: process.env.DB_CONNECTION,  
+    user: process.env.DB_USERNAME, 
+    password: process.env.DB_PASSWORD, 
+    database: process.env.DB_NAME,
+    connectionLimit: 0,  // default value  
+  });
 sequelize
 .authenticate()
 .then(() => {
