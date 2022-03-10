@@ -133,10 +133,8 @@ export const authenticateUser = async(req, res,next)=>
              return response;
         }
     } else {
-            var err = new Error('You are not authenticated!');
-            res.setHeader('WWW-Authenticate', 'Basic');
-            err.status = 401;
-            return next(err);
+        let response = { statusCode: 401, message: "You are not authenticated!" };
+        return response;
     }
     let returnedValue={foundUser:user,username:UName}
     return returnedValue;
