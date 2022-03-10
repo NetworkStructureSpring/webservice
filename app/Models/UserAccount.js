@@ -1,14 +1,17 @@
 import Sequelize from 'sequelize';
 
-const sequelize = createPool({
+var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+    host: process.env.DB_CONNECTION,
     port: 5432,
-    host: process.env.DB_CONNECTION,  
-    user: process.env.DB_USERNAME, 
-    password: process.env.DB_PASSWORD, 
-    database: process.env.DB_NAME,
-    connectionLimit: 0,  // default value  
-  });
-//const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
+    logging: console.log,
+    maxConcurrentQueries: 100,
+    dialect: 'postgres',
+    dialectOptions: {
+        ssl:'Amazon RDS'
+    },
+    pool: { maxConnections: 5, maxIdleTime: 30},
+    language: 'en'
+})
 sequelize
 .authenticate()
 .then(() => {
