@@ -14,7 +14,7 @@
    When pull request is raised from the feature branch to the organization main branch the github action should run and check branch protection and if all the test cases of the application are passing.Only if both condition are met then allow merging.
 
 ### Endpoints:
-# GET Particular User
+# GET Particular User.
 Url:http://localhost:3000/v1/user/self
 
 # POST : Create new user
