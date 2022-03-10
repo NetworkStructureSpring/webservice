@@ -26,7 +26,7 @@ export const upload = multer({
   fileFilter,
   storage: multerS3({
     s3,
-    bucket: process.env.AWS_BUCKET_NAME,
+    bucket: process.env.S3_BUCKET_NAME,
     acl: 'private',
     metadata: function (req, file, cb) {
         cb(null,
