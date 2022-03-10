@@ -16,7 +16,7 @@ export const addProfilePic = async (request, response) => {
             setResponse(returnValue.statusCode, response, returnValue.message);
         }
         await upload.setFileName(request,response,returnValue.foundUser[0].dataValues.id)
-        const singleUpload = upload.upload.single('productimage');
+        const singleUpload = upload.upload.single("productimage");
          singleUpload(request, response, function (err) {
             if (err) {
                 return response.status(422).send({ errors: [{ title: 'File Upload Error', detail: err.message }] });

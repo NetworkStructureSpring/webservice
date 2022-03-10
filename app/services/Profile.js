@@ -3,11 +3,12 @@ import aws from 'aws-sdk';
 import multerS3 from 'multer-s3';
 import * as user from '../services/Health.js'
 import Profile from "../Models/Profile.js";
-
+import dotenv from 'dotenv';
+dotenv.config(); 
 
 var globalFileName = "";
 aws.config.update({
-  secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID
 });
 const s3 = new aws.S3();
@@ -98,7 +99,7 @@ export const deleteProfilePic = async (req, res, returnValue) => {
     }
     await Profile.destroy({ where: { user_id: returnValue.foundUser[0].dataValues.id } });
      s3.deleteObject({
-        Bucket: 'sonali.dev.domain.tld',
+        Bucket:  process.AWS_BUCKET_NAME,
         Key: returnValue.foundUser[0].dataValues.id+'.jpg'
       },function (err,data){})
     let response = { statusCode: 200, message: "Picture Deleted" };
