@@ -12,30 +12,30 @@ console.log('Connection has been established successfully.');
 .catch(err => {
 console.error('Unable to connect to the database:', err);
 });
-const User = sequelize.define('user', {
+const Profile = sequelize.define('profile', {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         primaryKey: true,
         allowNull:true
       },
-    username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique:true
-    },
-    password: {
+    file_name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    first_name: {
+    url: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    last_name: {
-        type: Sequelize.STRING,
+    upload_date: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    user_id: {
+        type: Sequelize.UUID,
         allowNull: false
     }
     
 });
-export default User;
+//Profile.sync({ force: true });
+export default Profile;
