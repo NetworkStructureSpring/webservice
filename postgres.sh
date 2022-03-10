@@ -5,7 +5,8 @@ sudo yum install -y nodejs
 sudo node -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
-cd webservice
+cp webservice /home/ec2-user/
+cd /home/ec2-user/webservice
 sudo ls -al
 sudo node server.js
 sudo npm i -g pm2
