@@ -1,9 +1,15 @@
 import Sequelize from 'sequelize';
 
-
+var connectionString = "";
+function setConnectionString()
+{
+    connectionString = process.env.DB_CONNECTION;
+    console.log(connectionString);
+}
+setConnectionString();
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
-    host: 'process.env.DB_CONNECTION',
+    host: connectionString,
     port: 5432,
     pool: {
       max: 10,
