@@ -7,10 +7,9 @@ import Profile from "../Models/Profile.js";
 
 var globalFileName = "";
 aws.config.update({
-  secretAccessKey: "azdKYKzYFY6g5u6U7HCrkoOL/LHskgm7W/BzzgkD",
-  accessKeyId: "AKIA256ELQTI43QQ7NPC"
+  secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID
 });
-
 const s3 = new aws.S3();
 export const setFileName = async (req, res,name) => {
     globalFileName = name;
@@ -26,7 +25,7 @@ export const upload = multer({
   fileFilter,
   storage: multerS3({
     s3,
-    bucket: 'sonali.dev.domain.tld',
+    bucket: process.env.AWS_BUCKET_NAME,
     acl: 'public-read-write',
     metadata: function (req, file, cb) {
         cb(null,
