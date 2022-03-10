@@ -5,12 +5,16 @@ sudo yum install -y nodejs
 sudo node -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
-cp webservice /home/ec2-user/
-cd /home/ec2-user/webservice
-sudo ls -al
-sudo node server.js
-sudo npm i -g pm2
+cd ~/webservice
+
+sudo npm install pm2@latest -g
+sudo pm2 startup systemd --service-name myapp
 sudo pm2 start server.js
-sudo pm2 startup systemd
 sudo pm2 save
-sudo pm2 list
+# sudo ls -al
+# sudo node server.js
+# sudo npm i -g pm2
+# sudo pm2 start server.js
+# sudo pm2 startup systemd
+# sudo pm2 save
+# sudo pm2 list
