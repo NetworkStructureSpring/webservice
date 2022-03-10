@@ -1,6 +1,6 @@
 import * as upload from '../services/Profile.js'
 
-const setResponse = async(statusCode, response, message) => {
+const setResponse = (statusCode, response, message) => {
     response.status(statusCode);
     response.json(message);
 }
@@ -13,7 +13,9 @@ export const addProfilePic = async (request, response) => {
         
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
-            setResponse(returnValue.statusCode, response, returnValue.message);
+            response.status(401);
+            response.json(returnValue.message)
+            return response;
         }
         await upload.setFileName(request,response,returnValue.foundUser[0].dataValues.id)
         const singleUpload = upload.upload.single("productimage");
@@ -34,7 +36,9 @@ export const getProfilePic = async (request, response) => {
     try {
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
-            setResponse(returnValue.statusCode, response, returnValue.message);
+            response.status(401);
+            response.json(returnValue.message)
+            return response;
         }
         const result = await upload.getProfilePic(request, response, returnValue);
         setResponse(result.statusCode, response, result.message);
@@ -48,7 +52,9 @@ export const deleteProfilePic = async (request, response) => {
     try {
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
-            setResponse(returnValue.statusCode, response, returnValue.message);
+            response.status(401);
+            response.json(returnValue.message)
+            return response;
         }
         const result = await upload.deleteProfilePic(request, response, returnValue);
         setResponse(result.statusCode, response, result.message);
