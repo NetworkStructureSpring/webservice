@@ -1,26 +1,25 @@
 import Sequelize from 'sequelize';
 
-var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host: process.env.DB_CONNECTION,
-    port: 5432,
-    logging: console.log,
-    maxConcurrentQueries: 100,
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
-    dialectOptions: {
-        ssl:'Amazon RDS'
+    host:'process.env.DB_CONNECTION',
+    port: 5432,
+    pool: {
+      max: 10,
+      idle: 30000
     },
-    pool: { maxConnections: 5, maxIdleTime: 30},
-    language: 'en'
 })
-sequelize
-.authenticate()
-.then(() => {
-console.log('Connection has been established successfully.');
-})
-.catch(err => {
-console.error('Unable to connect to the database:', err);
-});
-
+async function connect() {
+    console.log('Checking database connection...');
+    try {
+      await sequelize.authenticate();
+      console.log('Connection has been established successfully.');
+    } catch (error) {
+      console.error('Unable to connect to the database:', error);
+      process.exit(1);
+    }
+}
+connect();
 const Profile = sequelize.define('profile', {
     id: {
         type: Sequelize.UUID,
