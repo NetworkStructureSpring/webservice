@@ -28,12 +28,12 @@ variable "sshUsername" {
 
 variable "aws_access_key" {
   type    = string
-  default = env("AWS_ACCESS_KEY")
+  default = ""
 }
 
 variable "aws_secret_key" {
   type    = string
-  default = env("AWS_SECRET_KEY")
+  default = ""
 }
 variable "aws_acct_list" {
   type    = list(string)
@@ -44,7 +44,7 @@ source "amazon-ebs" "ami-image" {
   ami_name      = "AMI{{timestamp}}"
   instance_type = "${var.instance}"  
   region        = "${var.region}"  
-  ami_users     = "${var.aws_acct_list}"
+  #ami_users     = "${var.aws_acct_list}"
   source_ami_filter {
     filters = {
       name                = "amzn2-ami-kernel-5.10-hvm-2.0.20220207.1-x86_64-gp2"
@@ -68,6 +68,6 @@ build {
     destination = "~/"
   }
   provisioner "shell"{
-    script = "./postgres.sh"
+    script = "postgres.sh"
   }
 }

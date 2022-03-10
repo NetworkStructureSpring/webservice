@@ -108,7 +108,7 @@ export const getParticularUser = async (req,res,next) => {
         return response;
     }
 }
-const authenticateUser = async(req, res,next)=>
+export const authenticateUser = async(req, res,next)=>
 {
     var authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -132,7 +132,7 @@ const authenticateUser = async(req, res,next)=>
             let response = { statusCode: 401, message: "You are not authenticated!" };
              return response;
         }
-        } else {
+    } else {
             var err = new Error('You are not authenticated!');
             res.setHeader('WWW-Authenticate', 'Basic');
             err.status = 401;
