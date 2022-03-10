@@ -66,12 +66,12 @@ export const saveToDatabase = async (req, res, returnValue) => {
                     user_id: returnValue.foundUser[0].dataValues.id
                 }
             });
-            let response = { statusCode: 200, message:newRegistration};
+            let response = { statusCode: 201, message:newRegistration};
             return response;
         };
         
         await newRegistration.save();
-        let response = { statusCode: 200, message:newRegistration};
+        let response = { statusCode: 201, message:newRegistration};
         return response;
     }
     catch (e)
@@ -84,7 +84,7 @@ export const saveToDatabase = async (req, res, returnValue) => {
 export const getProfilePic = async (req, res, returnValue) => {
     const profile = await Profile.findAll({ where: { user_id: returnValue.foundUser[0].dataValues.id } });
     if (profile == "")  {
-        let response = { statusCode: 400, message: "Profile Picture Does not exist" };
+        let response = { statusCode: 404, message: "Profile Picture Does not exist" };
         return response;
     }
     let response = { statusCode: 200, message: profile };
@@ -94,7 +94,7 @@ export const getProfilePic = async (req, res, returnValue) => {
 export const deleteProfilePic = async (req, res, returnValue) => {
     const profile = await Profile.findAll({ where: { user_id: returnValue.foundUser[0].dataValues.id } });
     if (profile == "")  {
-        let response = { statusCode: 400, message: "Profile Picture Does not exist" };
+        let response = { statusCode: 404, message: "Profile Picture Does not exist" };
         return response;
     }
     await Profile.destroy({ where: { user_id: returnValue.foundUser[0].dataValues.id } });
@@ -102,6 +102,6 @@ export const deleteProfilePic = async (req, res, returnValue) => {
         Bucket:  process.AWS_BUCKET_NAME,
         Key: returnValue.foundUser[0].dataValues.id+'.jpg'
       },function (err,data){})
-    let response = { statusCode: 200, message: "Picture Deleted" };
+    let response = { statusCode: 204, message: "" };
     return response;
 }

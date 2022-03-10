@@ -1,6 +1,6 @@
 import * as upload from '../services/Profile.js'
 
-const setResponse = (statusCode, response, message) => {
+const setResponse = async(statusCode, response, message) => {
     response.status(statusCode);
     response.json(message);
 }
@@ -21,11 +21,8 @@ export const addProfilePic = async (request, response) => {
             if (err) {
                 return response.status(422).send({ errors: [{ title: 'File Upload Error', detail: err.message }] });
              }
-             const result = upload.saveToDatabase(request, response, returnValue)
-             response.status(200);
-             response.json(result);
-             return response;
-            // setResponse(result.statusCode, response, result.message);   // change this
+             const result = await upload.saveToDatabase(request, response, returnValue)
+             await setResponse(result.statusCode, response, result.message);   // change this
          });
     }
     catch (e) {
