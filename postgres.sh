@@ -7,8 +7,8 @@ sudo unzip webservice.zip -d webservice
 sudo ls -al
 cd webservice
 sudo ls -al
-sudo npm i -g pm2
-sudo pm2 start server.js
-sudo pm2 startup systemd
-sudo pm2 save
-sudo pm2 list
+ npm i -g pm2
+ pm2 start server.js
+ pm2 startup systemd
+ pm2 save
+ pm2 list
