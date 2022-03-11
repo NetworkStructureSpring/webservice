@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [Ass-5]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
