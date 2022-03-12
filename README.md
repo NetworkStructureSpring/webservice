@@ -11,7 +11,7 @@
    To run the test type npm test in the terminal it should return status of all the test cases.
 
 ### GitHub Action 
-   When pull request is raised from the feature branch to the organization main branch the github action should run and check branch protection and if all the test cases of the application are passing.Only if both condition are met then allow merging.
+   When pull request is raised from the feature branch to the organization main branch the github action should run and check branch protection and if all the test cases of the application are passing.Only if both condition are met then allow merging..
 
 ### Endpoints:
 # GET Particular User.
