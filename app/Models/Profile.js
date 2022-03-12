@@ -1,5 +1,4 @@
 import Sequelize from 'sequelize';
-
 var connectionString = "";
 function setConnectionString()
 {
@@ -9,7 +8,7 @@ function setConnectionString()
 setConnectionString();
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
-    host: connectionString,
+    host:  connectionString,
     port: 5432,
     pool: {
       max: 10,
@@ -27,32 +26,30 @@ async function connect() {
     }
 }
 connect();
-    
-const User = sequelize.define('user', {
+const Profile = sequelize.define('profile', {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         primaryKey: true,
         allowNull:true
       },
-    username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique:true
-    },
-    password: {
+    file_name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    first_name: {
+    url: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    last_name: {
-        type: Sequelize.STRING,
+    upload_date: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    user_id: {
+        type: Sequelize.UUID,
         allowNull: false
     }
     
 });
-User.sync({ force: true });
-export default User;
+Profile.sync({ force: true });
+export default Profile;

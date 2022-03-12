@@ -108,14 +108,13 @@ export const getParticularUser = async (req,res,next) => {
         return response;
     }
 }
-const authenticateUser = async(req, res,next)=>
+export const authenticateUser = async(req, res,next)=>
 {
     var authHeader = req.headers.authorization;
     if (!authHeader) {
         var err = new Error('You are not authenticated!');
-        res.setHeader('WWW-Authenticate', 'Basic');
-        err.status = 401;
-        return next(err)
+        let response = { statusCode: 401, message: "You are not authenticated!" };
+        return response;
     }
     var auth = new Buffer.from(authHeader.split(' ')[1],'base64').toString().split(':');
     var UName = auth[0];
@@ -132,11 +131,9 @@ const authenticateUser = async(req, res,next)=>
             let response = { statusCode: 401, message: "You are not authenticated!" };
              return response;
         }
-        } else {
-            var err = new Error('You are not authenticated!');
-            res.setHeader('WWW-Authenticate', 'Basic');
-            err.status = 401;
-            return next(err);
+    } else {
+        let response = { statusCode: 401, message: "You are not authenticated!" };
+        return response;
     }
     let returnedValue={foundUser:user,username:UName}
     return returnedValue;
