@@ -15,7 +15,7 @@
 
 ### Endpoints:
 # GET Particular User.
-Url:http://localhost:3000/v1/user/self
+Url:http://localhost:3000/v1/user/self.
 
 # POST : Create new user
 URL: http://localhost:3000/v1/user
