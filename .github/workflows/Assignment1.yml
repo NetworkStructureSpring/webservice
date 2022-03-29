@@ -22,7 +22,16 @@ jobs:
         with:
           name: node-app
           path: .
-      - run: npm test
+      - name: Build Deployment Artifact
+        run: |
+          pwd
+          mkdir codedeploy_artifact
+          zip -r csye6225-webapp-${{ github.run_number }}.zip node-app scripts/*.sh appspec.yml 
+          pwd
+          ls -al
+          mv csye6225-webapp-${{ github.run_number }}.zip codedeploy_artifact/
+          cd codedeploy_artifact
+          ls -al
       - run: zip -r webservice.zip ./
       - run: ls -al
       - name: Packer Started
