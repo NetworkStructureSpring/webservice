@@ -63,10 +63,10 @@ build {
   sources = [
     "source.amazon-ebs.ami-image",
   ]
-  provisioner "file" {
-    source = "webservice.zip"
-    destination = "~/"
-  }
+  // provisioner "file" {
+  //   source = "webservice.zip"
+  //   destination = "~/"
+  // }
   provisioner "shell"{
     script = "postgres.sh"
   }
