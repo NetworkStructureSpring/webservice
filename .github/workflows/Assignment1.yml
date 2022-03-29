@@ -29,12 +29,10 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: "AKIA256ELQTI7LUQZPID"
+          aws-secret-access-key: "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"
           aws-region: us-east-1
       - name: Upload Zip to S3
         run: |
           rm -rf aws
-          ls -al
           aws --region us-east-1 deploy push --application-name csye6225-webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha }}.zip --source .
-          aws deploy list-applications --region us-east-1
