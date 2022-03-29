@@ -17,21 +17,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build --if-present
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: .
-      - name: Build Deployment Artifact
-        run: |
-          pwd
-          mkdir codedeploy_artifact
-          zip -r csye6225-webapp-${{ github.run_number }}.zip node-app scripts/*.sh appspec.yml 
-          pwd
-          ls -al
-          mv csye6225-webapp-${{ github.run_number }}.zip codedeploy_artifact/
-          cd codedeploy_artifact
-          ls -al
       - run: zip -r webservice.zip ./
       - run: ls -al
       - name: Packer Started
@@ -42,3 +27,12 @@ jobs:
         env:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      - name: Upload Zip to S3
+        run: |
+          rm -rf aws
+          aws deploy push \
+          --application-name csye6225-webapp \
+          --description "Latest revision for csye6225-webapp-${{ github.sha }}" \
+          --ignore-hidden-files \
+          --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha}}.zip \
+          --source .
