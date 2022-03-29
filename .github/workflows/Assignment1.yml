@@ -37,4 +37,4 @@ jobs:
           rm -rf aws
           ls -al
           aws deploy list-applications --region us-east-1
-          aws deploy push --application-name csye6225-webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha }}.zip --source .
+          aws --region us-east-1 deploy push --application-name csye6225-webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha }}.zip --source .
