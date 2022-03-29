@@ -30,5 +30,4 @@ jobs:
       - name: Upload Zip to S3
         run: |
           rm -rf aws
-          aws deploy push --application-name csye6225-webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files 
-          --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha }}.zip --source .
+          aws deploy push --application-name csye6225-webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha }}.zip --source .
