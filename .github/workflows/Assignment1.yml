@@ -29,8 +29,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: "AKIA256ELQTI7LUQZPID"
-          aws-secret-access-key: "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"
+          aws-access-key-id: ${{ secrets.USER_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.USER_SECRET_KEY }}
           aws-region: us-east-1
       - name: Upload Zip to S3
         run: |
