@@ -19,10 +19,6 @@ jobs:
           npm install
           npm run build --if-present
           zip -r webservice.zip ./
-          git archive -o webservice.zip HEAD
-          mkdir artifacts
-          zip -r csye6225-webapp-${{ github.sha }}.zip webservice.zip
-          cp csye6225-webapp-${{ github.sha }}.zip artifacts/
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

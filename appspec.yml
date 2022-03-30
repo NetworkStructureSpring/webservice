@@ -5,14 +5,6 @@ files:
     destination: /home/ec2-user/webservice
     overwrite: true
 hooks:
-  # BeforeInstall:
-  #   - location: scripts/install.sh
-  #     timeout: 400
-
-  # AfterInstall:
-  #   - location: scripts/post_install.sh
-  #     timeout: 200
-
   ApplicationStart:
     - location: scripts/run.sh
       timeout: 120
