@@ -19,14 +19,14 @@ jobs:
           npm install
           npm run build --if-present
           zip -r webservice.zip ./
-      - name: Packer Started
-        run: |
-          packer init packer.pkr.hcl
-          packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
-          packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
-        env:
-          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      # - name: Packer Started
+      #   run: |
+      #     packer init packer.pkr.hcl
+      #     packer validate -var-file="var.pkrvars.hcl" packer.pkr.hcl
+      #     packer build -var-file="var.pkrvars.hcl" packer.pkr.hcl
+      #   env:
+      #     AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      #     AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
