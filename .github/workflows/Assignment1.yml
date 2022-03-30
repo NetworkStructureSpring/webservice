@@ -32,20 +32,10 @@ jobs:
       - name: Copy artifacts
         run: |
           rm -rf aws
-          aws deploy push 
-          --application-name csye6225webapp 
-          --description "Latest revision for csye6225-webapp-${{ github.sha }}" 
-          --ignore-hidden-files 
-          --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha}}.zip 
-          --source .
+          aws deploy push --application-name csye6225webapp --description "Latest revision for csye6225-webapp-${{ github.sha }}" --ignore-hidden-files --s3-location s3://aws-codedeploy-dev-sonali/csye6225-webapp-${{ github.sha}}.zip  --source .
       - name: Call Code Deploy
         run: |
-          aws deploy create-deployment 
-          --application-name csye6225webapp 
-          --deployment-config-name CodeDeployDefault.AllAtOnce 
-          --deployment-group-name csye6225webappdeployment 
-          --file-exists-behavior OVERWRITE 
-          --s3-location bucket=s3://aws-codedeploy-dev-sonali,key=csye6225-webapp-${{ github.sha }}.zip,bundleType=zip
+          aws deploy create-deployment --application-name csye6225webapp --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name csye6225webappdeployment --file-exists-behavior OVERWRITE --s3-location bucket=s3://aws-codedeploy-dev-sonali,key=csye6225-webapp-${{ github.sha }}.zip,bundleType=zip
       - name: Packer Started
         run: |
           packer init packer.pkr.hcl
