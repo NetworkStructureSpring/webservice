@@ -31,8 +31,9 @@ jobs:
           aws-region: us-east-1
       - name: Copy artifacts
         run: |
-          aws s3 sync ./artifacts 
-          rm -rf aws s3://aws-codedeploy-dev-sonali
+          rm -rf aws 
+          aws s3 sync ./artifacts s3://aws-codedeploy-dev-sonali
+
       - name: Packer Started
         run: |
           packer init packer.pkr.hcl
