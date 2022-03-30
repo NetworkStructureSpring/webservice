@@ -7,7 +7,7 @@
  * URL to hit the api endpoint is: http://localhost:3000/healthz with get request parameter. 
  * If endpoint is visible then 200 response will be returned...
  
-### Run Test
+### Run Test.
    To run the test type npm test in the terminal it should return status of all the test cases.
 
 ### GitHub Action 
