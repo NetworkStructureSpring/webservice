@@ -21,7 +21,7 @@ export const createNewUser = async (req,res) => {
         }
         const user = await User.findAll({ where: { username: req.body.username } });
         if (user != "")  {
-            let response = { statusCode: 400, message: "User Already Exist" };
+            let response = { statusCode: 400, message: "User Already Exist..." };
             return response;
         };
         req.body.password = bcrypt.hashSync(req.body.password, 10);  
