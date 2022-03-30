@@ -35,7 +35,7 @@ jobs:
           aws s3 sync ./artifacts s3://aws-codedeploy-dev-sonali
       - name: Call Code Deploy
         run: |
-          aws deploy create-deployment --application-name csye6225-webapp --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name csye6225-webapp-deployment --file-exists-behavior OVERWRITE --s3-location bucket=s3://aws-codedeploy-dev-sonali,key=csye6225-webapp-${{ github.sha }}.zip,bundleType=zip
+          aws deploy create-deployment --application-name csye6225webapp --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name csye6225webappdeployment --file-exists-behavior OVERWRITE --s3-location bucket=s3://aws-codedeploy-dev-sonali,key=csye6225-webapp-${{ github.sha }}.zip,bundleType=zip
       - name: Packer Started
         run: |
           packer init packer.pkr.hcl
