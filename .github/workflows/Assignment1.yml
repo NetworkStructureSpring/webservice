@@ -42,3 +42,7 @@ jobs:
         env:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+
+      - name: Call Code Deploy
+        run: |
+          aws deploy create-deployment --application-name csye6225-webapp --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name csye6225-webapp-deployment --file-exists-behavior OVERWRITE --s3-location bucket=s3://aws-codedeploy-dev-sonali,key=csye6225-webapp-${{ github.sha }}.zip,bundleType=zip
