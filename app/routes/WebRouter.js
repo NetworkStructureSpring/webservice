@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/healthz')
 .get(healthController.getServiceHealth)  //If http request is get then request is forwarded to getAllTodoItems controller endpoint
-router.route('/v2/user')
+router.route('/v3/user')
 .post(userAccountController.createUser)
 router.route('/v1/user/self')
     .put(userAccountController.updateUser)
