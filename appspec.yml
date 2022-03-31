@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/webservice
+    overwrite: true
+hooks:
+  ApplicationStart:
+    - location: scripts/run.sh
+      timeout: 120
+      runas: ec2-user
