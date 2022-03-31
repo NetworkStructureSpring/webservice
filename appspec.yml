@@ -8,5 +8,9 @@ file_exists_behavior: OVERWRITE
 hooks:
   ApplicationStart:
     - location: scripts/run.sh
-      timeout: 120
+      timeout: 300
+      runas: ec2-user
+  ValidateService:
+    - location: script/validate.sh
+      timeout: 180
       runas: ec2-user
