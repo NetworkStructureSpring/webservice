@@ -7,9 +7,9 @@ sudo ls -al
 cd ~/webservice
 
 sudo npm install pm2@latest -g
-sudo pm2 startup systemd --service-name myapp
-sudo pm2 start server.js
-sudo pm2 save
+# sudo pm2 startup systemd --service-name myapp
+# sudo pm2 start server.js
+# sudo pm2 save
 
 
 sudo yum update
