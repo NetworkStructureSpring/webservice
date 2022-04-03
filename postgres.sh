@@ -5,12 +5,7 @@ sudo node -v
 sudo unzip webservice.zip -d webservice
 sudo ls -al
 cd ~/webservice
-
 sudo npm install pm2@latest -g
-# sudo pm2 startup systemd --service-name myapp
-# sudo pm2 start server.js
-# sudo pm2 save
-
 
 sudo yum update
 sudo yum install wget ruby -y
@@ -23,6 +18,8 @@ chmod +x ./install
 sudo ./install auto
 sudo service codedeploy-agent start
 sudo service codedeploy-agent status
+sudo yum install amazon-cloudwatch-agent
+#sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:./Config.json
 
 
 
