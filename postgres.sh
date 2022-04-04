@@ -19,6 +19,10 @@ sudo ./install auto
 sudo service codedeploy-agent start
 sudo service codedeploy-agent status
 sudo yum install amazon-cloudwatch-agent -y
+sudo pm2 kill
+sudo pm2 start server.js
+sudo pm2 save
+sudo pm2 startup systemd --service-name myapp
 #sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:./Config.json
 
 
