@@ -1,5 +1,5 @@
 import * as healthService from '../services/Health.js';
-import * as CloudWatchBuddy from 'cloudwatch-buddy';
+import CloudWatchBuddy from 'cloudwatch-buddy';
 
 
 var awsOptions = {
