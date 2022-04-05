@@ -1,9 +1,10 @@
 import * as healthService from '../services/Health.js';
 import CloudWatchBuddy from 'cloudwatch-buddy';
-import { awsOptions, logsOptions } from '../Config.js';
+import { awsOptions, logsOptions,metricsOptions } from '../Config.js';
 
 var cwbLogs = new CloudWatchBuddy(awsOptions).logs(logsOptions);
-cwbMetrics.increment('pageviews');
+var cwbMetrics = new CloudWatchBuddy(awsOptions).metrics(metricsOptions);
+
 //This method handles success status code
 const setSuccessResponse = (data, response) => {
     response.sendStatus(data);
@@ -14,7 +15,8 @@ const errorHandler = (data, response) => {
 }
 export const getServiceHealth = async (request, response) => {
     try {
-        cwbLogs.log('Sonali', 'Test message');
+        // cwbLogs.log('Sonali', 'Test message');
+		cwbMetrics.increment('pageviews');
         const result = await healthService.getServiceHealth(); 
         setSuccessResponse(result, response);
     }

@@ -11,5 +11,9 @@ var logsOptions = {
 	logFormat: 'string',
 	debug: true,
 };
+var metricsOptions = {			// You can use either or both metric and log collection.
+	namespace: 'test-data',
+	timeout: 60					// See below for a complete list of options
+};
 
-export { awsOptions, logsOptions};
+export { awsOptions, logsOptions,metricsOptions};
