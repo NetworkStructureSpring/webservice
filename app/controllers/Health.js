@@ -1,9 +1,9 @@
 import * as healthService from '../services/Health.js';
-import CloudWatchBuddy from 'cloudwatch-buddy';
-import { awsOptions, logsOptions,metricsOptions } from '../Config.js';
-
-var cwbLogs = new CloudWatchBuddy(awsOptions).logs(logsOptions);
-var cwbMetrics = new CloudWatchBuddy(awsOptions).metrics(metricsOptions);
+import SDC from 'statsd-client';
+let sdc = new SDC({
+  host: 'localhost',
+  prefix: 'csye6225-webapp'
+});
 
 //This method handles success status code
 const setSuccessResponse = (data, response) => {
@@ -14,9 +14,8 @@ const errorHandler = (data, response) => {
     response.sendStatus(400);
 }
 export const getServiceHealth = async (request, response) => {
-    try {
-        // cwbLogs.log('Sonali', 'Test message');
-		cwbMetrics.increment('pageviews');
+	try {
+		sdc.increment('POST/v2/user')
         const result = await healthService.getServiceHealth(); 
         setSuccessResponse(result, response);
     }
