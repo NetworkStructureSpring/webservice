@@ -8,7 +8,6 @@ export const val={
             combine_logs: true,
             out_file: '/home/ec2-user/logs/webapp-out.log',
             log_date_format:'YYY-MM-DD HH:mm Z'
-            
         },
     ],
     
