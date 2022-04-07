@@ -15,6 +15,7 @@ const errorHandler = (data, response) => {
 export const createUser = async (request, response) => {
     try {
         sdc.increment('POST/v1/user');
+        console.log("Add User Endpoint");
         const item = await healthService.createNewUser(request,response); 
         setResponse(item.statusCode, response, item.message);
     }
@@ -25,6 +26,7 @@ export const createUser = async (request, response) => {
 export const updateUser = async (request, response) => {
     try {
         sdc.increment('PUT/v1/user');
+        console.log("Update User Endpoint");
         const item = await healthService.updateUser(request,response); 
         setResponse(item.statusCode, response, item.message);
     }
@@ -35,6 +37,7 @@ export const updateUser = async (request, response) => {
 export const getParticularUser = async (request, response) => {
     try {
         sdc.increment('GET/v1/user');
+        console.log("Get Particular User Endpoint");
         const item = await healthService.getParticularUser(request,response); 
         setResponse(item.statusCode, response, item.message);
     }

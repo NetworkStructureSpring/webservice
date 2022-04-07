@@ -15,6 +15,7 @@ const errorHandler = (data, response) => {
 export const addProfilePic = async (request, response) => {
     try {
         sdc.increment('POST/v1/user/self/pic');
+        console.log("Post Profile Pic Endpoint");
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
             response.status(401);
@@ -39,6 +40,7 @@ export const addProfilePic = async (request, response) => {
 export const getProfilePic = async (request, response) => {
     try {
         sdc.increment('GET/v1/user/self/pic');
+        console.log("Get Profile Pic Endpoint");
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
             response.status(401);
@@ -56,6 +58,7 @@ export const getProfilePic = async (request, response) => {
 export const deleteProfilePic = async (request, response) => {
     try {
         sdc.increment('DELETE/v1/user/self/pic');
+        console.log("Delete Profile Pic Endpoint");
         var returnValue = await upload.authenticateUser(request, response);
         if (returnValue.statusCode == 401) {
             response.status(401);

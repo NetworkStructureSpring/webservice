@@ -16,7 +16,7 @@ const errorHandler = (data, response) => {
 export const getServiceHealth = async (request, response) => {
 	try {
         sdc.increment('GET/healthz');
-        console.log("Sonali is testing");
+        console.log("Health Endpoint");
         const result = await healthService.getServiceHealth(); 
         setSuccessResponse(result, response);
     }
