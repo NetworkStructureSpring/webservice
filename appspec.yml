@@ -6,11 +6,19 @@ files:
     overwrite: true
 file_exists_behavior: OVERWRITE
 hooks:
+  BeforeInstall:
+    - location: scripts/beforeInstall.sh
+      timeout: 300
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/afterInstall.sh
+      timeout: 300
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/run.sh
       timeout: 300
       runas: ec2-user
   ValidateService:
     - location: scripts/validate.sh
-      timeout: 180
+      timeout: 300
       runas: ec2-user
