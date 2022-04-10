@@ -51,6 +51,9 @@ const User = sequelize.define('user', {
     last_name: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    verifiedUser: {
+        type: Boolean
     }
     
 });
