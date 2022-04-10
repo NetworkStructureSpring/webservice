@@ -35,7 +35,7 @@ export const createNewUser = async (req,res) => {
         var params = {
             TableName: tableName,
             Item: {
-                "Id": uuidv4()
+                "Id": "Test"
             }
         };
     
