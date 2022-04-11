@@ -3,7 +3,7 @@ import User from "../Models/UserAccount.js";
 import bcrypt from "bcrypt"; 
 import emailValidator from "email-validator";
 import AWS from "aws-sdk";
-import randomUUID from 'crypto';
+import short from "shortid";
 
 export const getServiceHealth = async () => {
     try {
@@ -29,19 +29,14 @@ export const createNewUser = async (req,res) => {
         req.body.password = bcrypt.hashSync(req.body.password, 10);  
         const newRegistration = new User(req.body)
         await newRegistration.save();
-        console.log("Testing");
         var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', region: 'us-east-1' });
-        const randomId = randomUUID();
-        console.log("Random Id:" + randomId);
         var params = {
             TableName: 'TokenTable',
             Item: {
-              'Token' : {S: randomId }
+              'Token' : {S: short()}
             }
         }
-        console.log("Testing2");
         const data = await ddb.putItem(params).promise();
-        console.log("Item entered successfully:", data);
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
