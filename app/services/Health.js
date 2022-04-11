@@ -37,13 +37,8 @@ export const createNewUser = async (req,res) => {
             }
         }
         console.log("Testing2");
-        ddb.putItem(params, function(err, data) {
-            if (err) {
-              console.log("Error", err);
-            } else {
-              console.log("Success", data);
-            }
-          });
+        const data = await ddb.putItem(params).promise();
+        console.log("Item entered successfully:", data);
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
