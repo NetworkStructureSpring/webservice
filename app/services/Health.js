@@ -32,14 +32,22 @@ export const createNewUser = async (req,res) => {
         const secondsSinceEpoch = Math.round(Date.now() / 1000);
         const expirationTime = secondsSinceEpoch + 5 * 60;
         var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', region: 'us-east-1' });
+        const randomId = short();
         var params = {
             TableName: 'TokenTable',
             Item: {
-                'Token': { S: short() },
+                'Token': { S: randomId },
                 'TimeToLive': { N: expirationTime.toString()}
             }
         }
         await ddb.putItem(params).promise();
+        var params = {
+            Username: newRegistration.username, 
+            Token: randomId,
+            TopicArn: "arn:aws:sns:us-east-1:348023801163:MailNotification"
+          };
+        var publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31', region: 'us-east-1' });
+        await publishTextPromise.publish(params).promise();
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
