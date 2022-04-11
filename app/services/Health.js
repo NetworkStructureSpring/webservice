@@ -2,8 +2,6 @@ import axios from "axios";
 import User from "../Models/UserAccount.js";
 import bcrypt from "bcrypt"; 
 import emailValidator from "email-validator";
-import AWS from 'aws-sdk';
-import uuidv4 from "uuid4";
 
 export const getServiceHealth = async () => {
     try {
@@ -27,26 +25,8 @@ export const createNewUser = async (req,res) => {
             return response;
         };
         req.body.password = bcrypt.hashSync(req.body.password, 10);  
-        req.body.verifiedUser = false;
         const newRegistration = new User(req.body)
         await newRegistration.save();
-        const client = new AWS.DynamoDB.DocumentClient();
-        const tableName = 'TokenTable';
-        var params = {
-            TableName: tableName,
-            Item: {
-                "Id": "Test"
-            }
-        };
-    
-        client.put(params, (err, data) => {
-            if (err) {
-                console.error("Unable to add item.");
-                console.error("Error JSON:", JSON.stringify(err, null, 2));
-            } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
-            }
-        });
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
