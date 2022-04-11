@@ -29,14 +29,17 @@ export const createNewUser = async (req,res) => {
         req.body.password = bcrypt.hashSync(req.body.password, 10);  
         const newRegistration = new User(req.body)
         await newRegistration.save();
+        const secondsSinceEpoch = Math.round(Date.now() / 1000);
+        const expirationTime = secondsSinceEpoch + 5 * 60;
         var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', region: 'us-east-1' });
         var params = {
             TableName: 'TokenTable',
             Item: {
-              'Token' : {S: short()}
+                'Token': { S: short() },
+                'TimeToLive': { N: expirationTime}
             }
         }
-        const data = await ddb.putItem(params).promise();
+        await ddb.putItem(params).promise();
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
