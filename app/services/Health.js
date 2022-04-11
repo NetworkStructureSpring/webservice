@@ -30,11 +30,12 @@ export const createNewUser = async (req,res) => {
         const newRegistration = new User(req.body)
         await newRegistration.save();
         console.log("Testing");
-        var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10',region: 'us-east-1' });
+        var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', region: 'us-east-1' });
+        const randomId = randomUUID();
         var params = {
             TableName: 'TokenTable',
             Item: {
-              'Token' : {S: randomUUID() }
+              'Token' : {S: randomId }
             }
         }
         console.log("Testing2");
