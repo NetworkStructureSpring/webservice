@@ -4,7 +4,7 @@
  * As the node modules get installed , run node server.js
  * After that it will indicate that the server is up.
  * You can now use postman to hit the api from outside .
- * URL to hit the api endpoint is: http://localhost:3000/healthz with get request parameter. 
+ * URL to hit the api endpoint is: http://localhost:3000/healthz with get request parameter. .
  * If endpoint is visible then 200 response will be returned....
  
 ### Run Test.
