@@ -29,22 +29,21 @@ export const createNewUser = async (req,res) => {
         const newRegistration = new User(req.body)
         await newRegistration.save();
         console.log("Testing");
-        const client = new AWS.DynamoDB.DocumentClient();
-        console.log("Testing2");
+        var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
         var params = {
-            TableName: "TokenTable",
+            TableName: 'TokenTable',
             Item: {
-                "Id": "Test"
+              'Token' : {S: 'Sonali'}
             }
-        };
-        client.put(params, (err, data) => {
+        }
+        console.log("Testing2");
+        ddb.putItem(params, function(err, data) {
             if (err) {
-                console.error("Unable to add item.");
-                console.error("Error JSON:", JSON.stringify(err, null, 2));
+              console.log("Error", err);
             } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
+              console.log("Success", data);
             }
-        });
+          });
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,

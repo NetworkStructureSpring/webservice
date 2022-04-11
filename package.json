@@ -19,7 +19,6 @@
   "homepage": "https://github.com/neu-mis-info6150-fall2021/assignment-7-sonalisinghnortheastern#readme",
   "dependencies": {
     "assert": "^2.0.0",
-    "aws-sdk": "^2.1111.0",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "cloudwatch-buddy": "0.0.14",
