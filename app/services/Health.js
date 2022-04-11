@@ -3,6 +3,7 @@ import User from "../Models/UserAccount.js";
 import bcrypt from "bcrypt"; 
 import emailValidator from "email-validator";
 import AWS from "aws-sdk";
+import randomUUID from 'crypto';
 
 export const getServiceHealth = async () => {
     try {
@@ -33,7 +34,7 @@ export const createNewUser = async (req,res) => {
         var params = {
             TableName: 'TokenTable',
             Item: {
-              'Token' : {S: 'Sonali'}
+              'Token' : {S: randomUUID() }
             }
         }
         console.log("Testing2");
