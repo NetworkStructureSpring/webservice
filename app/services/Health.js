@@ -36,7 +36,7 @@ export const createNewUser = async (req,res) => {
             TableName: 'TokenTable',
             Item: {
                 'Token': { S: short() },
-                'TimeToLive': { N: expirationTime}
+                'TimeToLive': { N: expirationTime.toString()}
             }
         }
         await ddb.putItem(params).promise();
