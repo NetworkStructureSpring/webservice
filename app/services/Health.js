@@ -159,5 +159,59 @@ export const authenticateUser = async(req, res,next)=>
     let returnedValue={foundUser:user,username:UName}
     return returnedValue;
 }
+export const verifyUser = async (req,res,next) => {
+    try {
+        const UName = request.params.email;
+        const token = request.params.token;
+        const user = await User.findAll({ where: { username: UName } });
+        if (user == "") {
+            let response = { statusCode: 401, message: "You are not authenticated!" };
+            return response;
+        }
+        if (user[0].dataValues.verifiedUser) {
+            let response = { statusCode: 400, message: "You are already verified" };
+            return response;
+        }
+        AWS.config.update({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+            region: "us-east-1"
+        });
+        var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10',region: "us-east-1"});
+    
+        var params = {
+        TableName: 'TokenTable',
+        Key: {
+            'Token': {S: token}
+        },
+        ProjectionExpression: 'Token'
+        };
+    
+        const data = await ddb.getItem(params).promise();
+        console.log("Testing values Sonali");
+        console.log(data.Item);
+        console.log(data.Item.Token);
+        if (data.Item == undefined || data.Item.Token < Math.round(Date.now() / 1000))
+        {
+            let response = { statusCode: 400, message: "Token expired" };
+            return response;
+        }
+        await User.update({
+            verifiedUser:  true
+        }, {
+            where: {
+                username: UName
+            }
+        });
+        let response = { statusCode: 204, message:""};
+        return response;
+
+    }
+    catch (e) {
+        console.log("Error" + e.message);
+        let response = { statusCode: 500, message: e.message };
+        return response;
+    }
+}
 
 
