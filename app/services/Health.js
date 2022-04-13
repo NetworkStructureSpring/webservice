@@ -163,54 +163,50 @@ export const verifyUser = async (req,res,next) => {
     try {
         console.log("I am here");
         console.log(req.query.email);
-        // const queryString = window.location.search;
-        // console.log(queryString);
-        // const urlParams = new URLSearchParams(queryString);
-        // const email = urlParams.get('email')
-        // const UName = req.params.email;
-        // const token = req.params.token;
-        // console.log(email);
-        // console.log(token);
-        // const user = await User.findAll({ where: { username: UName } });
-        // if (user == "") {
-        //     let response = { statusCode: 401, message: "You are not authenticated!" };
-        //     return response;
-        // }
-        // if (user[0].dataValues.verifiedUser) {
-        //     let response = { statusCode: 400, message: "You are already verified" };
-        //     return response;
-        // }
-        // AWS.config.update({
-        //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        //     secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
-        //     region: "us-east-1"
-        // });
-        // var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10',region: "us-east-1"});
+        const UName = req.query.email;
+        const token = req.query.token;
+        console.log(email);
+        console.log(token);
+        const user = await User.findAll({ where: { username: UName } });
+        if (user == "") {
+            let response = { statusCode: 401, message: "You are not authenticated!" };
+            return response;
+        }
+        if (user[0].dataValues.verifiedUser) {
+            let response = { statusCode: 400, message: "You are already verified" };
+            return response;
+        }
+        AWS.config.update({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+            region: "us-east-1"
+        });
+        var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10',region: "us-east-1"});
     
-        // var params = {
-        // TableName: 'TokenTable',
-        // Key: {
-        //     'Token': {S: token}
-        // },
-        // ProjectionExpression: 'Token'
-        // };
+        var params = {
+        TableName: 'TokenTable',
+        Key: {
+            'Token': {S: token}
+        },
+        ProjectionExpression: 'Token'
+        };
     
-        // const data = await ddb.getItem(params).promise();
-        // console.log("Testing values Sonali");
-        // console.log(data.Item);
-        // console.log(data.Item.Token);
-        // if (data.Item == undefined || data.Item.Token < Math.round(Date.now() / 1000))
-        // {
-        //     let response = { statusCode: 400, message: "Token expired" };
-        //     return response;
-        // }
-        // await User.update({
-        //     verifiedUser:  true
-        // }, {
-        //     where: {
-        //         username: UName
-        //     }
-        // });
+        const data = await ddb.getItem(params).promise();
+        console.log("Testing values Sonali");
+        console.log(data.Item);
+        console.log(data.Item.Token);
+        if (data.Item == undefined || data.Item.Token < Math.round(Date.now() / 1000))
+        {
+            let response = { statusCode: 400, message: "Token expired" };
+            return response;
+        }
+        await User.update({
+            verifiedUser:  true
+        }, {
+            where: {
+                username: UName
+            }
+        });
         let response = { statusCode: 204, message:""};
         return response;
 
