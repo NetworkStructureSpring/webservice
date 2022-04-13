@@ -36,7 +36,7 @@ export const createNewUser = async (req,res) => {
         var params = {
             TableName: 'TokenTable',
             Item: {
-                'Token': { S: randomId },
+                'TokenName': { S: randomId },
                 'TimeToLive': { N: expirationTime.toString()}
             }
         }
@@ -184,16 +184,16 @@ export const verifyUser = async (req,res,next) => {
         var params = {
         TableName: 'TokenTable',
         Key: {
-            'Token': {S: token}
+            'TokenName': {S: token}
         },
-        ProjectionExpression: 'Token'
+        ProjectionExpression: 'TokenName'
         };
     
         const data = await ddb.getItem(params).promise();
         console.log("Testing values Sonali");
         console.log(data.Item);
-        console.log(data.Item.Token);
-        if (data.Item == undefined || data.Item.Token < Math.round(Date.now() / 1000))
+        console.log(data.Item.TokenName);
+        if (data.Item == undefined || data.Item.TokenName < Math.round(Date.now() / 1000))
         {
             let response = { statusCode: 400, message: "Token expired" };
             return response;
