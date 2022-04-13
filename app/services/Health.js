@@ -145,6 +145,10 @@ export const authenticateUser = async(req, res,next)=>
         let response = { statusCode: 401, message: "You are not authenticated!" };
         return response;
     }
+    if (!user[0].dataValues.verifiedUser) {
+        let response = { statusCode: 401, message: "You are not verified.Please verify the link sent to you to proceed" };
+        return response;
+    }
     if (UName == user[0].dataValues.username) {
         var password = await bcrypt.compare(pass, user[0].dataValues.password);
         if (!password) 
