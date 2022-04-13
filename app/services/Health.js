@@ -161,8 +161,8 @@ export const authenticateUser = async(req, res,next)=>
 }
 export const verifyUser = async (req,res,next) => {
     try {
-        const UName = request.params.email;
-        const token = request.params.token;
+        const UName = req.params.email;
+        const token = req.params.token;
         const user = await User.findAll({ where: { username: UName } });
         if (user == "") {
             let response = { statusCode: 401, message: "You are not authenticated!" };
