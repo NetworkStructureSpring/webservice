@@ -162,7 +162,7 @@ export const authenticateUser = async(req, res,next)=>
 export const verifyUser = async (req,res,next) => {
     try {
         console.log("I am here");
-        console.log(req);
+        console.log(req.query.email);
         // const queryString = window.location.search;
         // console.log(queryString);
         // const urlParams = new URLSearchParams(queryString);
@@ -211,8 +211,8 @@ export const verifyUser = async (req,res,next) => {
         //         username: UName
         //     }
         // });
-        // let response = { statusCode: 204, message:""};
-        // return response;
+        let response = { statusCode: 204, message:""};
+        return response;
 
     }
     catch (e) {
