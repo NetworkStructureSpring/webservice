@@ -197,8 +197,9 @@ export const verifyUser = async (req,res,next) => {
         console.log("Testing values Sonali");
         console.log(data.Item);
         console.log(data.Item.TokenName);
-        if (data.Item == undefined || data.Item.TokenName < Math.round(Date.now() / 1000))
+        if (data.Item == undefined || data.Item.TokenName.S < Math.round(Date.now() / 1000))
         {
+            console.log("Expired Token Sonali")
             let response = { statusCode: 400, message: "Token expired" };
             return response;
         }
