@@ -161,6 +161,8 @@ export const authenticateUser = async(req, res,next)=>
 }
 export const verifyUser = async (req,res,next) => {
     try {
+        const queryString = window.location.search;
+        console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const email = urlParams.get('email')
         const UName = req.params.email;
