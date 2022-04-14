@@ -2,6 +2,8 @@ import axios from "axios";
 import User from "../Models/UserAccount.js";
 import bcrypt from "bcrypt"; 
 import emailValidator from "email-validator";
+import AWS from "aws-sdk";
+import short from "shortid";
 
 export const getServiceHealth = async () => {
     try {
@@ -27,13 +29,32 @@ export const createNewUser = async (req,res) => {
         req.body.password = bcrypt.hashSync(req.body.password, 10);  
         const newRegistration = new User(req.body)
         await newRegistration.save();
+        const secondsSinceEpoch = Math.round(Date.now() / 1000);
+        const expirationTime = secondsSinceEpoch + 5 * 60;
+        var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', region: 'us-east-1' });
+        const randomId = short();
+        var params = {
+            TableName: 'TokenTable',
+            Item: {
+                'TokenName': { S: randomId },
+                'TimeToLive': { N: expirationTime.toString()}
+            }
+        }
+        await ddb.putItem(params).promise();
+        var params = {
+            Message: newRegistration.username, 
+            Subject: "http://prod.sonalisingh30.me/v1/verifyUserEmail?email="+newRegistration.username+"&token="+randomId,
+            TopicArn: "arn:aws:sns:us-east-1:348023801163:MailNotification"
+          };
+        var publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31', region: 'us-east-1' });
+        await publishTextPromise.publish(params).promise();
         const newUser = {
                 id:newRegistration.id,
                 username: newRegistration.username,
                 first_name: newRegistration.first_name,
                 last_name: newRegistration.last_name, 
                 createdAt: newRegistration.createdAt,
-                updatedAt: newRegistration.updatedAt,
+                updatedAt: newRegistration.updatedAt
         };
         let response = { statusCode: 200, message:newUser};
         return response;
@@ -124,6 +145,10 @@ export const authenticateUser = async(req, res,next)=>
         let response = { statusCode: 401, message: "You are not authenticated!" };
         return response;
     }
+    if (!user[0].dataValues.verifiedUser) {
+        let response = { statusCode: 401, message: "You are not verified.Please verify the link sent to you to proceed" };
+        return response;
+    }
     if (UName == user[0].dataValues.username) {
         var password = await bcrypt.compare(pass, user[0].dataValues.password);
         if (!password) 
@@ -137,6 +162,57 @@ export const authenticateUser = async(req, res,next)=>
     }
     let returnedValue={foundUser:user,username:UName}
     return returnedValue;
+}
+export const verifyUser = async (req,res,next) => {
+    try {
+        const UName = req.query.email;
+        const token = req.query.token;
+        const user = await User.findAll({ where: { username: UName } });
+        if (user == "") {
+            let response = { statusCode: 401, message: "You are not authenticated!" };
+            return response;
+        }
+        if (user[0].dataValues.verifiedUser) {
+            let response = { statusCode: 400, message: "You are already verified" };
+            return response;
+        }
+        AWS.config.update({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+            region: "us-east-1"
+        });
+        var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10',region: "us-east-1"});
+    
+        var params = {
+        TableName: 'TokenTable',
+        Key: {
+            'TokenName': {S: token}
+        },
+        ProjectionExpression: 'TimeToLive'
+        };
+    
+        const data = await ddb.getItem(params).promise();
+        if (data.Item == undefined || (data.Item.TimeToLive.N) < Math.round(Date.now() / 1000))
+        {
+            let response = { statusCode: 400, message: "Token expired" };
+            return response;
+        }+
+        await User.update({
+            verifiedUser:  true
+        }, {
+            where: {
+                username: UName
+            }
+        });
+        let response = { statusCode: 204, message:""};
+        return response;
+
+    }
+    catch (e) {
+        console.log("Error" + e.message);
+        let response = { statusCode: 500, message: e.message };
+        return response;
+    }
 }
 
 

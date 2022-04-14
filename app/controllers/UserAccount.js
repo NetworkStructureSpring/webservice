@@ -45,3 +45,14 @@ export const getParticularUser = async (request, response) => {
         errorHandler(e.message, response);
     }
 }
+export const verifyUser = async (request, response) => {
+    try {
+        sdc.increment('GET/v1/verifyEmail');
+        console.log("Verify User Endpoint");
+        const item = await healthService.verifyUser(request,response); 
+        setResponse(item.statusCode, response, item.message);
+    }
+    catch (e) {
+        errorHandler(e.message, response);
+    }
+}

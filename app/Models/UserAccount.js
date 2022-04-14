@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 
 var connectionString = "";
+//const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
 function setConnectionString()
 {
     connectionString = process.env.DB_CONNECTION;
@@ -51,6 +52,9 @@ const User = sequelize.define('user', {
     last_name: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    verifiedUser: {
+        type: Sequelize.BOOLEAN
     }
     
 });
