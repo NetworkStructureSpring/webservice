@@ -190,7 +190,7 @@ export const verifyUser = async (req,res,next) => {
         Key: {
             'TokenName': {S: token}
         },
-        ProjectionExpression: 'TokenName'
+        ProjectionExpression: 'TimeToLive'
         };
     
         const data = await ddb.getItem(params).promise();
