@@ -195,6 +195,7 @@ export const verifyUser = async (req,res,next) => {
     
         const data = await ddb.getItem(params).promise();
         console.log("Testing values Sonali");
+        console.log(data);
         console.log(data.Item);
         console.log((data.Item.TokenName.S));
         console.log(Number(data.Item.TokenName.S));
