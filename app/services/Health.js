@@ -196,6 +196,7 @@ export const verifyUser = async (req,res,next) => {
         const data = await ddb.getItem(params).promise();
         console.log("Testing values Sonali");
         console.log(data.Item);
+        console.log((data.Item.TokenName.S));
         console.log(Number(data.Item.TokenName.S));
         console.log(Math.round(Date.now() / 1000));
         console.log(Number(data.Item.TokenName.S) - Math.round(Date.now() / 1000))
