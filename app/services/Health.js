@@ -196,7 +196,7 @@ export const verifyUser = async (req,res,next) => {
         {
             let response = { statusCode: 400, message: "Token expired" };
             return response;
-        }+
+        }
         await User.update({
             verifiedUser:  true
         }, {
