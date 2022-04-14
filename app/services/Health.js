@@ -195,8 +195,8 @@ export const verifyUser = async (req,res,next) => {
     
         const data = await ddb.getItem(params).promise();
         console.log("Testing values Sonali");
-        console.log(Number(data.Item.TokenName.S) - Math.round(Date.now() / 1000))
-        if (data.Item == undefined || (data.Item.TokenName.N) < Math.round(Date.now() / 1000))
+        console.log(Number(data.Item.TimeToLive.N) - Math.round(Date.now() / 1000))
+        if (data.Item == undefined || (data.Item.TimeToLive.N) < Math.round(Date.now() / 1000))
         {
             console.log("Expired Token Sonali")
             let response = { statusCode: 400, message: "Token expired" };
