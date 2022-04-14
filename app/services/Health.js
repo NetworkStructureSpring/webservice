@@ -196,12 +196,12 @@ export const verifyUser = async (req,res,next) => {
         const data = await ddb.getItem(params).promise();
         console.log("Testing values Sonali");
         console.log(data.Item);
-        if (data.Item == undefined || data.Item.TokenName.S < Math.round(Date.now() / 1000))
+        if (data.Item == undefined || Number(data.Item.TokenName.S) < Math.round(Date.now() / 1000))
         {
             console.log("Expired Token Sonali")
             let response = { statusCode: 400, message: "Token expired" };
             return response;
-        }
+        }+
         await User.update({
             verifiedUser:  true
         }, {
