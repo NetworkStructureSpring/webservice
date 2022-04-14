@@ -9,7 +9,7 @@ router.route('/healthz')
 .get(healthController.getServiceHealth)  //If http request is get then request is forwarded to getAllTodoItems controller endpoint
 router.route('/v1/user')
 .post(userAccountController.createUser)
-router.route('/v1/verifyEmail')
+router.route('/v1/verifyUserEmail')
     .get(userAccountController.verifyUser)
 router.route('/v1/user/self')
     .put(userAccountController.updateUser)
