@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
-import fs from 'fs';
-console.log(pwd);
-const rdsCa = fs.readFileSync(pwd + '/us-east-1-bundle.pem');
+// import fs from 'fs';
+// console.log(pwd);
+// const rdsCa = fs.readFileSync(pwd + '/us-east-1-bundle.pem');
 var connectionString = "";
 //const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
 function setConnectionString()
@@ -15,13 +15,14 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
     host:  connectionString,
     port: 5432,
     pool: {
-      max: 10,
-      idle: 30000
+        max: 10,
+        idle: 30000
     },
-    ssl: {
-        rejectUnauthorized: true,
-        ca: [rdsCa]
-    }
+    // },
+    // ssl: {
+    //     rejectUnauthorized: true,
+    //     ca: [rdsCa]
+    // }
 })
 async function connect() {
     console.log('Checking database connection...');
