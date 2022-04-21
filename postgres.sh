@@ -18,9 +18,6 @@ CODEDEPLOY_BIN="/opt/codedeploy-agent/bin/codedeploy-agent"
 $CODEDEPLOY_BIN stop
 yum erase codedeploy-agent -y
 cd /home/ec2-user
-sudo amazon-linux-extras install postgresql13 -y
-sudo yum install -y postgresql13 -y
-sudo psql --version
 wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
 chmod +x ./install
 sudo ./install auto
@@ -29,6 +26,3 @@ sudo service codedeploy-agent status
 sudo yum install amazon-cloudwatch-agent -y
 sudo service codedeploy-agent stop
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/home/ec2-user/webservice/amazon-cloudwatch-agent-schema.json
-
-
-
