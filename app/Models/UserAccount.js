@@ -1,4 +1,6 @@
 import Sequelize from 'sequelize';
+import fs from 'fs';
+const rdsCa = fs.readFileSync(secrets.AWS_ACCESS_KEY);
 
 var connectionString = "";
 //const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
@@ -16,6 +18,10 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
       max: 10,
       idle: 30000
     },
+    ssl: {
+        rejectUnauthorized: true,
+        ca: [rdsCa]
+    }
 })
 async function connect() {
     console.log('Checking database connection...');
