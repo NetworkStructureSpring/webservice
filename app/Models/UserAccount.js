@@ -1,6 +1,8 @@
 import Sequelize from 'sequelize';
 import fs from 'fs';
-const rdsCa = fs.readFileSync(secrets.AWS_ACCESS_KEY);
+const rdsCa = secrets.TEST
+console.log("I am here!!");
+console.log(rdsCa);
 
 var connectionString = "";
 //const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
