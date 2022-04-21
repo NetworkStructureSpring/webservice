@@ -43,7 +43,7 @@ export const createNewUser = async (req,res) => {
         await ddb.putItem(params).promise();
         var params = {
             Message: newRegistration.username, 
-            Subject: "http://prod.sonalisingh30.me/v1/verifyUserEmail?email="+newRegistration.username+"&token="+randomId,
+            Subject: "https://prod.sonalisingh30.me/v1/verifyUserEmail?email="+newRegistration.username+"&token="+randomId,
             TopicArn: "arn:aws:sns:us-east-1:348023801163:MailNotification"
           };
         var publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31', region: 'us-east-1' });

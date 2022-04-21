@@ -26,6 +26,3 @@ sudo service codedeploy-agent status
 sudo yum install amazon-cloudwatch-agent -y
 sudo service codedeploy-agent stop
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/home/ec2-user/webservice/amazon-cloudwatch-agent-schema.json
-
-
-
