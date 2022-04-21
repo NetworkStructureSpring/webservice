@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import fs from 'fs';
-const rdsCa = fs.readFileSync('./us-east-1-bundle.pem');
+console.log(pwd);
+const rdsCa = fs.readFileSync(pwd + '/us-east-1-bundle.pem');
 var connectionString = "";
 //const sequelize = new Sequelize('postgres://postgres:123Fall@2021@localhost:5432/UserAccount')
 function setConnectionString()
