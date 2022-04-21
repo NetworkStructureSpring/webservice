@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import fs from 'fs';
-const rdsCa = secrets.TEST
+const rdsCa = fs.readFileSync('./us-east-1-bundle.pem');
 console.log("I am here!!");
 console.log(rdsCa);
 
